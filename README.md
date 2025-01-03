@@ -2,42 +2,52 @@
 
 **AI-Powered Code Documentation Generator**
 
-CodeDocGenAI is a tool that uses artificial intelligence to automatically generate clear, readable documentation for GitHub repositories. Built with LangChain and Groq, it helps developers and users better understand codebases.
+CodeDocGenAI is an innovative tool that leverages artificial intelligence to generate clear, readable, and comprehensive documentation for GitHub repositories. Built with LangChain and Groq, it simplifies the process of understanding codebases for developers and non-technical users alike.
+
+---
 
 ## 🚀 Key Features
 
--   **AI Documentation Generation**: Creates clear, concise documentation from code
--   **GitHub Integration**: Directly fetches repository contents and issues
--   **Conversation Memory**: Maintains context during documentation sessions
--   **Multi-Format Support**: Handles multiple file types (.md, .py, etc.)
+-   **AI Documentation Generation**: Automatically creates clear and concise documentation from code.
+-   **GitHub Integration**: Fetches repository contents, issues, and pull requests directly.
+-   **Conversation Memory**: Maintains context during interactive documentation sessions.
+-   **Multi-Format Support**: Supports multiple file types, including `.md`, `.py`, `.js`, `.ts`, `.c`, `.cpp`, and `.java`.
+
+---
 
 ## 🛠️ Requirements
 
--   Python 3.10+
--   GitHub Personal Access Token
--   Groq API Key
+-   **Python**: Version 3.10 or higher
+-   **GitHub Personal Access Token**: For accessing repositories ([Generate one here](https://github.com/settings/tokens?type=beta))
+-   **Groq API Key**: For utilizing Groq-powered AI capabilities
+
+---
 
 ## ⚙️ Installation
 
-1. Clone the repository:
+1. **Clone the repository**:
 
-```bash
-git clone https://github.com/ifsvivek/CodeDocGenAI.git
-cd CodeDocGenAI
-```
+    ```bash
+    git clone https://github.com/ifsvivek/CodeDocGenAI.git
+    cd CodeDocGenAI
+    ```
 
-2. Install dependencies:
+2. **Install dependencies**:
 
-```bash
-pip install langchain-community langchain-groq python-dotenv
-```
+    ```bash
+    pip install langchain-community langchain-groq python-dotenv
+    ```
 
-3. Create a `.env` file:
+3. **Set up environment variables**:
 
-```
-ACCESS_TOKEN=your_github_token
-GROQ_API_KEY=your_groq_api_key
-```
+    Create a `.env` file in the project root and add your credentials:
+
+    ```
+    ACCESS_TOKEN=your_github_token
+    GROQ_API_KEY=your_groq_api_key
+    ```
+
+---
 
 ## 💻 Usage
 
@@ -47,7 +57,7 @@ Run the application:
 python app.py
 ```
 
-Example conversation:
+### Example Conversation
 
 ```
 === Code Documentation Generator AI ===
@@ -55,12 +65,14 @@ Type 'exit' to quit
 
 You: Explain the main functions
 AI: This codebase has two main functions:
-- generate_response: Handles AI responses using Groq
-- main: Runs the interactive CLI interface
+- `generate_response`: Handles AI responses using Groq
+- `main`: Runs the interactive CLI interface
 
 You: exit
 Goodbye!
 ```
+
+---
 
 ## 📁 Project Structure
 
@@ -69,12 +81,29 @@ Goodbye!
 ├── app.py         # Main application code
 ├── .env           # Environment variables
 ├── .gitignore     # Git ignore rules
-└── README.md      # Documentation
+└── README.md      # Project documentation
 ```
+
+---
 
 ## 🔧 Configuration
 
-The application uses two key environment variables:
+The application requires the following environment variables:
 
--   `ACCESS_TOKEN`: Your GitHub Personal Access Token
--   `GROQ_API_KEY`: Your Groq API Key
+-   **`ACCESS_TOKEN`**: Your GitHub Personal Access Token
+-   **`GROQ_API_KEY`**: Your Groq API Key
+
+Add these to a `.env` file in the root directory as shown in the installation steps.
+
+---
+
+## 🧑‍💻 Authors
+
+-   **Vivek** - [GitHub Profile](https://github.com/ifsvivek)
+-   **Yuvan** - [GitHub Profile](https://github.com/yuvan0309)
+
+---
+
+## 💬 Support
+
+For any questions or issues, feel free to [open an issue](https://github.com/ifsvivek/CodeDocGenAI/issues) or reach out via email.
