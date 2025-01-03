@@ -49,8 +49,6 @@ I use tools to help me. These tools are defined within <tools></tools> XML tags.
 Available tools:
 - load_github_repo: Loads a GitHub repository for analysis
   Arguments: {"repo": "owner/repo", "branch": "branch_name"}
-- reset_repos: Clears all loaded repositories
-  Arguments: {}
 
 Ask me about any code, and I'll provide simple, understandable documentation.
 """
@@ -77,14 +75,6 @@ async def load_github_repo(repo: str, branch: str = "main") -> str:
         return f"Error loading repository: {str(e)}"
 
 
-async def reset_repos() -> str:
-    try:
-        loaded_repos.clear()
-        return "Successfully cleared all loaded repositories"
-    except Exception as e:
-        return f"Error clearing repositories: {str(e)}"
-
-
 async def handle_tool_call(response, memory):
     start = response.index("<tool_call>") + len("<tool_call>")
     end = response.index("</tool_call>")
@@ -99,8 +89,7 @@ async def handle_tool_call(response, memory):
         tool_actions = {
             "load_github_repo": lambda: load_github_repo(
                 tool_arguments.get("repo"), tool_arguments.get("branch", "main")
-            ),
-            "reset_repos": reset_repos,
+            )
         }
 
         action = tool_actions.get(tool_name)
@@ -118,7 +107,6 @@ async def handle_tool_call(response, memory):
 
 
 async def generate_response(prompt: str) -> str:
-    # Get repo context if available
     repo_context = "\n".join(
         [
             f"\nRepo: {repo}\n" + "\n".join([doc.page_content for doc in docs])
@@ -144,7 +132,6 @@ async def generate_response(prompt: str) -> str:
 
     content = response.content
 
-    # Handle tool calls if present
     if "<tool_call>" in content and "</tool_call>" in content:
         content = await handle_tool_call(content, conversation_memory[context_key])
 
@@ -162,7 +149,8 @@ conversation_memory[context_key] = ConversationBufferMemory(
 
 async def main():
     print("\n=== Code Documentation Generator AI ===")
-    print("Type 'exit' to quit\n")
+    print("Type 'exit' to quit")
+    print("Type 'reset' to clear all repositories and conversation history\n")
 
     while True:
         try:
@@ -171,6 +159,15 @@ async def main():
             if user_input.lower() == "exit":
                 print("Goodbye!")
                 break
+
+            if user_input.lower() == "reset":
+                loaded_repos.clear()
+                conversation_memory.clear()
+                conversation_memory[context_key] = ConversationBufferMemory(
+                    return_messages=True, memory_key="chat_history"
+                )
+                print("\nAI: All repositories and conversation history cleared.\n")
+                continue
 
             if not user_input:
                 continue
