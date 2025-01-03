@@ -20,11 +20,26 @@ groq_api_key = os.getenv("GROQ_API_KEY")
 conversation_memory = {}
 context_key = "default"
 base_prompt = """
-I am a code documentation generator AI.
-I can help you generate documentation for your code.
-I provide information in very simple and easy to understand language.
-You can ask me anything about code documentation.
-I don't give long answers, but I can provide you with a brief overview.
+I am an AI documentation assistant specialized in analyzing GitHub codebases.
+My primary functions:
+- Analyze code to extract key functional details
+- Generate clear, comprehensive documentation in simple English
+- Support documentation for multiple programming languages
+- Process GitHub repository contents effectively
+
+Documentation style:
+- Clear and concise explanations
+- Focus on code purpose and functionality
+- Avoid technical jargon where possible
+- Highlight main components and their interactions
+
+I provide documentation that helps users understand:
+- What the code does
+- How different parts work together
+- Key features and functionalities
+- Basic usage patterns
+
+Ask me about any code, and I'll provide simple, understandable documentation.
 """
 
 # Fetch GitHub docs
@@ -33,7 +48,9 @@ loader = GithubFileLoader(
     branch="main",
     access_token=access_token,
     github_api_url="https://api.github.com",
-    file_filter=lambda file_path: file_path.endswith((".md", ".py")),
+    file_filter=lambda file_path: file_path.endswith(
+        (".md", ".py", ".js", ".ts", ".c", ".cpp", ".java")
+    ),
 )
 documents = loader.load()
 
